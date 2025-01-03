@@ -4,7 +4,7 @@ NUMBER=$1
 
 echo "Entered number is: $NUMBER"
 
-if [$NUMBER -gt 100]
+if [ $NUMBER -gt 100 ]
 then
     echo "Given number is greater than 100"
 else
