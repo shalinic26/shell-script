@@ -5,6 +5,7 @@ USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
+N="\e[0m"
 
 LOGS_FOLDER="/var/log/shellscript-logs"
 LOG_FILE=$(echo $0 | cut -d "." -f1)
@@ -15,10 +16,10 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 VALIDATE(){                 # This function needs previous command's (dnf install mysql -y) exit status as Input
 if [ $1 -ne 0 ]             # -> $1 will have exit status of previous command i.e. dnf install mysql -y is previous command
     then
-        echo -e "$2.....$R FAILURE"
+        echo -e "$2.....$R FAILURE $N"
         exit 1
     else
-        echo -e "$2......$G SUCCESS"
+        echo -e "$2......$G SUCCESS $N"
     fi
 }
 
@@ -38,7 +39,7 @@ then
     VALIDATE $? "Installing MySQL"   # 2 arguments we are passing to function , 1st arg what is exit status code of previous command and 2nd arg is what i was trying to do in previous statement i am mentioning
     
 else
-    echo -e "MySQL is already......$Y INSTALLED"
+    echo -e "MySQL is already......$Y INSTALLED $N"
 fi
 
 dnf list installed git &>>$LOG_FILE_NAME
@@ -49,6 +50,6 @@ then
     VALIDATE $? "Installing Git"
     
 else
-    echo -e "Git is already......$Y INSTALLED"
+    echo -e "Git is already......$Y INSTALLED $N"
 fi
 
