@@ -19,7 +19,8 @@ mkdir -p $LOGS_FOLDER
 echo "Filename: $0"
 
 USAGE(){
-    echo -e "$R USAGE:: $N sh 19-Logs-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS(optional)>"
+    # echo -e "$R USAGE:: $N sh 19-Logs-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS(optional)>"
+    echo -e "$R USAGE:: $N logsbackup <SOURCE_DIR> <DEST_DIR> <DAYS(optional)>"
     exit 1
 }
 
