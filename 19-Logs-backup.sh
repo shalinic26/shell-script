@@ -37,7 +37,7 @@ then
     USAGE
 fi
 
-if [ ! -d $SOURCE_DIR ]
+if [ ! -d $SOURCE_DIR ] # true *  false = false
 then    
     echo -e "$SOURCE_DIR Does not exists....Please check"
     exit 1
@@ -54,4 +54,9 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 
-echo "Files are: $FILES"
+if [ -n "$FILES" ] # this condition is true if there are files to zip
+then
+    echo "Files are: $FILES"
+else
+    echo "No Files found older than $DAYS"
+fi
