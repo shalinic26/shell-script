@@ -25,9 +25,7 @@ VALIDATE(){                 # This function needs previous command's (dnf instal
 }
 
 mkdir -p $LOGS_FOLDER
-VALIDATE $? "Creating shell script logs directory"
-
-echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
+# VALIDATE $? "Creating shell script logs directory"
 
 USAGE(){
     echo -e "$R USAGE:: $N sh 19-Logs-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS(optional)>"
@@ -38,3 +36,18 @@ if [ $# -lt 2 ]
 then
     USAGE
 fi
+
+if [ ! -d $SOURCE_DIR ]
+then    
+    echo -e "$SOURCE_DIR Does not exists....Please check"
+    exit 1
+fi
+
+
+if [ ! -d $DEST_DIR ]
+then    
+    echo -e "$DEST_DIR Does not exists....Please check"
+    exit 1
+fi
+
+echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
