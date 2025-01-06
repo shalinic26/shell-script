@@ -14,16 +14,6 @@ LOG_FILE=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
-VALIDATE(){                 # This function needs previous command's (dnf install mysql -y) exit status as Input
-    if [ $1 -ne 0 ]             # -> $1 will have exit status of previous command i.e. dnf install mysql -y is previous command
-    then
-        echo -e "$2.....$R FAILURE $N"
-        exit 1
-    else
-        echo -e "$2......$G SUCCESS $N"
-    fi
-}
-
 mkdir -p $LOGS_FOLDER
 # VALIDATE $? "Creating shell script logs directory"
 
@@ -59,6 +49,19 @@ then
     echo "Files are: $FILES"
     ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
     find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
+    if [ -f "$ZIP_FILE" ]
+    then
+        echo -e "Successfully created zip file for files older than $DAYS"
+        while read -r file
+        do
+            echo "Deleting file: $file"
+            rm -rf $file
+            echo "Deleted file: $file"
+        done <<< $FILES_TO_DELETE
+    else
+        echo -e "$R Error:: $N Failed to create Zip File"
+        exit 1
+    fi
 else
     echo "No Files found older than $DAYS"
 fi
