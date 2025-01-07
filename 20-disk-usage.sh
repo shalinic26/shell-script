@@ -15,7 +15,7 @@ do
     echo "MountFolder: $MOUNT_FOLDER, Usage: $USAGE"
 
     # For comparing something we always need to write condition
-    if [ $USAGE -ge $DISK_THRESHOLD] #Here -ge means greater than or equal to     
+    if [ $USAGE -ge $DISK_THRESHOLD ] #Here -ge means greater than or equal to     
     then
         MSG+="High Disk usage on mount folder: $MOUNT_FOLDER Usage is: $USAGE \n "
     fi
