@@ -22,3 +22,5 @@ do
 done <<< $DISK_USAGE
 
 echo -e "Message: $MSG" # -e means --> enabling 
+
+echo "$MSG" | mutt -s "High Disk Usage" shalini.chintala.26@gmail.com
